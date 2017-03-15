@@ -5,9 +5,14 @@
   "author": "Matthias Damm",
   "contributors": [],
   "license": "MIT",
-  "repository": "nash-md/twilio-contact-center",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nash-md/twilio-contact-center.git"
+  },
   "main": "app.js",
-  "bugs": "https://github.com/nash-md/twilio-contact-center/issues",
+  "bugs": {
+    "url": "https://github.com/nash-md/twilio-contact-center/issues"
+  },
   "private": false,
   "keywords": [
     "Twilio",
@@ -28,11 +33,12 @@
     "body-parser": "^1.15.1",
     "compression": "^1.6.2",
     "express": "^4.13.4",
-    "express-session": "^1.13.0",
+    "express-session": "^1.15.1",
     "pg": "^4.5.6",
     "twilio": "^2.9.x"
   },
   "devDependencies": {
+    "dotenv": "^4.0.0",
     "eslint": "^3.5.x"
   },
   "engines": {
@@ -44,6 +50,7 @@
   ],
   "scripts": {
     "start": "node app.js",
-    "lint": "./node_modules/.bin/eslint . || exit 0"
-  }
+    "lint": "eslint . || exit 0"
+  },
+  "homepage": "https://github.com/nash-md/twilio-contact-center#readme"
 }

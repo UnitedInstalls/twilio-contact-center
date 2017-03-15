@@ -2,6 +2,7 @@
 
 const twilio 	= require('twilio')
 const async 	= require('async')
+require('dotenv').config()
 
 /* client for Twilio Programmable Voice / SMS */
 const client = new twilio(
