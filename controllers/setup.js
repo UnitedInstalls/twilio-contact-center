@@ -2,7 +2,7 @@
 
 const twilio 	= require('twilio')
 const async 	= require('async')
-require('dotenv').config()
+require('dotenv').config() // to be able to get key values from .env
 
 /* client for Twilio Programmable Voice / SMS */
 const client = new twilio(

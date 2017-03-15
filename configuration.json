@@ -1,16 +1,21 @@
 {
     "ivr": {
-        "text": "Welcome to my call center, please press 1 for sales, press 2 for support",
+        "text": "",
         "options": [
             {
-                "friendlyName": "Sales",
-                "digit": 3,
-                "id": "sales"
+                "friendlyName": "Interior Projects",
+                "digit": 1,
+                "id": "interior_projects"
             },
             {
-                "friendlyName": "Support",
-                "digit": 4,
-                "id": "support"
+                "friendlyName": "Kitchen & Bath",
+                "digit": 2,
+                "id": "kitchen__bath"
+            },
+            {
+                "friendlyName": "Billing & Accounting",
+                "digit": 3,
+                "id": "billing__accounting"
             }
         ]
     },
