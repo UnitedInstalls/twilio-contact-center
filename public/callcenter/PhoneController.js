@@ -10,7 +10,7 @@ app.controller('PhoneController', function ($scope, $rootScope, $http, $timeout,
 
     $log.log('InitializePhone event received');
 
-    Twilio.Device.setup(data.token, {debug: true}); 
+    Twilio.Device.setup(data.token, {debug: true});
 
     Twilio.Device.ready(function (device) {
       $scope.status = 'Ready';

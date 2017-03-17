@@ -2,7 +2,10 @@
 
 const twilio = require('twilio')
 
-/* client for Twilio TaskRouter */
+/*
+client for Twilio TaskRouter
+https://github.com/twilio/twilio-node/blob/master/lib/TaskRouterClient.js
+*/
 const taskrouterClient = new twilio.TaskRouterClient(
 	process.env.TWILIO_ACCOUNT_SID,
 	process.env.TWILIO_AUTH_TOKEN,
@@ -24,7 +27,10 @@ module.exports.login = function (req, res) {
 			var worker = data.workers[i]
 
 			if (worker.friendlyName === friendlyName) {
-				/* create a token for taskrouter */
+				/*
+				create a token for taskrouter 
+				https://github.com/twilio/twilio-node/blob/master/lib/TaskRouterWorkerCapability.js
+				*/
 				var workerCapability = new twilio.TaskRouterWorkerCapability(
 					process.env.TWILIO_ACCOUNT_SID,
 					process.env.TWILIO_AUTH_TOKEN,
@@ -32,9 +38,12 @@ module.exports.login = function (req, res) {
 
 				workerCapability.allowActivityUpdates()
 				workerCapability.allowReservationUpdates()
-				workerCapability.allowFetchSubresources()
+				workerCapability.allowFetchSubresources() // https://github.com/twilio/twilio-node/blob/master/lib/TaskRouterCapability.js
 
-				/* create a token for Twilio Client */
+				/*
+				create a token for Twilio Client
+				https://github.com/twilio/twilio-node/blob/master/lib/Capability.js
+				*/
 				var phoneCapability = new twilio.Capability(
 					process.env.TWILIO_ACCOUNT_SID,
 					process.env.TWILIO_AUTH_TOKEN)
@@ -42,6 +51,7 @@ module.exports.login = function (req, res) {
 				phoneCapability.allowClientOutgoing(req.configuration.twilio.applicationSid)
 				phoneCapability.allowClientIncoming(friendlyName.toLowerCase())
 
+				/* https://github.com/twilio/twilio-node/blob/master/lib/AccessToken.js */
 				var accessToken = new twilio.AccessToken(
 					process.env.TWILIO_ACCOUNT_SID,
 					process.env.TWILIO_API_KEY_SID,
@@ -50,7 +60,10 @@ module.exports.login = function (req, res) {
 
 				accessToken.identity = worker.friendlyName
 				
-				/* grant the access token Twilio Programmable Chat capabilities */
+				/*
+				grant the access token Twilio Programmable Chat capabilities
+				https://github.com/twilio/twilio-node/blob/master/lib/AccessToken.js
+				*/
 				var chatGrant = new twilio.AccessToken.IpMessagingGrant({
 					serviceSid: process.env.TWILIO_CHAT_SERVICE_SID,
 					endpointId: req.body.endpoint
@@ -58,7 +71,10 @@ module.exports.login = function (req, res) {
 
 				accessToken.addGrant(chatGrant)
 
-				/* grant the access token Twilio Video capabilities */
+				/*
+				grant the access token Twilio Video capabilities
+				https://github.com/twilio/twilio-node/blob/master/lib/AccessToken.js
+				*/
 				var videoGrant = new twilio.AccessToken.VideoGrant({
 					configurationProfileSid: process.env.TWILIO_VIDEO_CONFIGURATION_SID
 				})
@@ -115,7 +131,7 @@ module.exports.getSession = function (req, res) {
 }
 
 module.exports.call = function (req, res) {
-	var twiml = new twilio.TwimlResponse()
+	var twiml = new twilio.TwimlResponse() // https://github.com/twilio/twilio-node/blob/master/lib/TwimlResponse.js
 
 	twiml.dial({ callerId: req.configuration.twilio.callerId }, function (node) {
 		node.number(req.query.phone)
