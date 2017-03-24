@@ -2,6 +2,7 @@ var express       = require('express')
 var bodyParser    = require('body-parser')
 var sessions      = require('express-session')
 var compression   = require('compression')
+var mongoDB		  = require('mongodb').MongoClient
 
 /* check if the application runs on heroku */
 var util

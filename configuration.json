@@ -43,7 +43,7 @@
         }
     ],
     "twilio": {
-        "workerOfflineActivitySid": "WA878131ba5f332a4cef427221abd244a2",
+        "workerOfflineActivitySid": "WA13577ec74e576b1ecc48f3f434091d88",
         "workerIdleActivitySid": "WA878131ba5f332a4cef427221abd244a2",
         "workerReservationActivitySid": "WA10a312d30223aca3dd66decd54bddbd5",
         "workerAssignmentActivitySid": "WA13577ec74e576b1ecc48f3f434091d88",
