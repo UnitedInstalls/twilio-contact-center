@@ -1,6 +1,6 @@
 var express       = require('express')
-var bodyParser    = require('body-parser')
 var sessions      = require('express-session')
+var bodyParser    = require('body-parser')
 var compression   = require('compression')
 
 /* check if the application runs on heroku */
