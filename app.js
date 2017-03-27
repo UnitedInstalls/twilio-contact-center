@@ -1,7 +1,13 @@
-var express       = require('express')
-var bodyParser    = require('body-parser')
-var sessions      = require('express-session')
-var compression   = require('compression')
+var express       		= require('express')
+var bodyParser    		= require('body-parser')
+var sessions      		= require('express-session')
+var expressValidator 	= require('express-validator')
+var compression   		= require('compression')
+var mongo		  		= require('mongodb')
+var mongoose			= require('mongoose')
+
+//mongoose.connect('mongodb:\\localhost\insertDatabaseNameHere')
+//var db = mongoose.connection
 
 /* check if the application runs on heroku */
 var util
@@ -17,12 +23,30 @@ var app = express()
 app.set('port', (process.env.PORT || 5000))
 
 app.use(compression())
-app.use(sessions({resave: true,
-									saveUninitialized: false,
-									secret: 'keyboard cat',
-									name: 'twilio_call_center_session',
-									cookie: { maxAge: 3600}
-								}))
+app.use(sessions({
+	resave: true,
+	saveUninitialized: false,
+	secret: 'keyboard cat',
+	name: 'twilio_call_center_session',
+	cookie: { maxAge: 3600}
+}))
+
+app.use(expressValidator({
+  errorFormatter: function(param, msg, value) {
+      var namespace = param.split('.')
+      , root    = namespace.shift()
+      , formParam = root;
+
+    while(namespace.length) {
+      formParam += '[' + namespace.shift() + ']';
+    }
+    return {
+      param : formParam,
+      msg   : msg,
+      value : value
+    };
+  }
+}));
 
 app.use(bodyParser.json({}))
 app.use(bodyParser.urlencoded({

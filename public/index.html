@@ -2,6 +2,9 @@
 <html>
 <head>
 	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	
 	<title>United-Installs Contact Center</title>
 
 	<link rel="stylesheet" href="/styles/bootstrap.min.css" type="text/css" />
@@ -10,73 +13,53 @@
 	type="text/css" rel="stylesheet" />
 
 </head>
-
 <body ng-app="indexApplication">
-	<div class="container" style="max-width:960px">
+  <div class="container">
+      <div class="header clearfix">
+        <nav>
+          <ul class="nav nav-pills pull-right">
+            <li role="presentation" class="active"><a href="/index.html">Home</a></li>
+            <li role="presentation"><a href="/administration/index.html">Admin</a></li>
+            <li role="presentation"><a href="/callcenter/index.html">Login</a></li>
+          </ul>
+        </nav>
+        <h3 class="text-muted">United-Installs</h3>
+      </div>
 
-		<div class="row">
-			<div class="page-header col-md-12">
-				<h1>United-Installs Contact Center</h1>
-			</div>
-		</div>
+      <div class="jumbotron">
+        <h1>Jumbotron heading</h1>
+        <p class="lead">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
+        <p><a class="btn btn-lg btn-success" href="#" role="button">Sign up today</a></p>
+      </div>
 
-		<div class="row" ng-controller="IndexController" ng-init="validateSetup()">
+      <div class="row marketing">
+        <div class="col-lg-6">
+          <h4>Subheading</h4>
+          <p>Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.</p>
 
-			<div class="col-md-4 col-md-push-8">
+          <h4>Subheading</h4>
+          <p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.</p>
 
-				<div ng-if="setup == 'VALID'" class="alert alert-dismissible alert-success">
-					<strong>Well done!</strong><br />You sucessfully setup the demo.
-				</div>
+          <h4>Subheading</h4>
+          <p>Maecenas sed diam eget risus varius blandit sit amet non magna.</p>
+        </div>
 
-				<div ng-if="setup == 'INVALID'" class="alert alert-dismissible alert-danger">
-					<strong>Oh snap!</strong><br />
-					
-					<span ng-if="code == 'TWILIO_ACCOUNT_SID_INVALID'">The environment variable TWILIO_ACCOUNT_SID is not set or incorrect. If you are on Heroku please update your application settings.</span>
-					
-					<span ng-if="code == 'TWILIO_AUTH_TOKEN_INVALID'">The environment variable TWILIO_AUTH_TOKEN is not set or incorrect. If you are on Heroku please update your application settings.</span>
-					
-					<span ng-if="code == 'TWILIO_WORKSPACE_SID_INVALID'">The environment variable TWILIO_WORKSPACE_SID is not set or incorrect. If you are on Heroku please update your application settings.</span>
-					
-					<span ng-if="code == 'TWILIO_ACCOUNT_NOT_ACCESSIBLE'">The application could not access the Twilio API with the provided credentials. Please verify Account Sid and Auth Token.</span>
-					
-					<span ng-if="code == 'TWILIO_WORKSPACE_NOT_ACCESSIBLE'">The application could not access the your Twilio Taskrouter workspace please verify the Workspace Sid.</span>
-					
-					<span ng-if="code == 'TWILIO_APPLICATION_SID_INVALID'">The TwiML Applications SID is not set, please complete <strong>http://&lt;your_application&gt;/setup</strong> first</span>
+        <div class="col-lg-6">
+          <h4>Subheading</h4>
+          <p>Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.</p>
 
-					<span ng-if="code == 'TWILIO_APPLICATION_NOT_ACCESSIBLE'">The application could not access the TwiML Application.</span>
-				
-				</div>
+          <h4>Subheading</h4>
+          <p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.</p>
 
-			</div>
+          <h4>Subheading</h4>
+          <p>Maecenas sed diam eget risus varius blandit sit amet non magna.</p>
+        </div>
+      </div>
 
-			<div class="col-md-8 col-md-pull-4">
+      <footer class="footer">
+        <p>&copy; 2017 United-Installs, LLC</p>
+      </footer>
 
-				<h3>Call Center Administration</h3>
-				<span>A basic administration interface to create and delete new call centre agents.</span><br><br>
-				<div><a href="/administration/index.html" class="btn btn-primary">Open</a></div>
-
-				<h3>Call Agent Login</h3>
-				<span>The working environment for agents. Agents need to open this page and log in.</span>
-				<br><br>
-				<div><a href="/callcenter/index.html" class="btn btn-primary">Open</a></div>
-
-				<h3>Company's Website</h3>
-				<span>Page for customers who want to talk to an agent. Users can request a callback, call the agents via phone, request video support or chat with an agent</span>
-				<br><br>
-				<div>
-					<a href="/contact/index.html" class="btn btn-primary">Inbound &amp; Callback Request</a>
-					<a href="/contact/chat.html" class="btn btn-primary">Web Chat</a>
-					<a href="/contact/video.html" class="btn btn-primary">Video Call</a>
-				</div>
-
-			</div>
-
-		</div>
-
-	</div>
-
-	<script src="/scripts/angular.min.js"></script>
-	<script src="IndexController.js"></script>
-
+    </div> <!-- /container -->
 </body>
 </html>
