@@ -6,8 +6,8 @@ var compression   		= require('compression')
 var mongo		  		= require('mongodb')
 var mongoose			= require('mongoose')
 
-mongoose.connect('mongodb:\\localhost\insertDatabaseNameHere')
-var db = mongoose.connection
+//mongoose.connect('mongodb:\\localhost\insertDatabaseNameHere')
+//var db = mongoose.connection
 
 /* check if the application runs on heroku */
 var util
