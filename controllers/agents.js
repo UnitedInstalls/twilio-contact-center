@@ -14,8 +14,11 @@ const taskrouterClient = new twilio.TaskRouterClient(
 module.exports.login = function (req, res) {
 	var friendlyName = req.body.worker.friendlyName
 
-	/* all token we generate are valid for 1 hour */
-	var lifetime = 3600
+	/*
+	all token we generate are valid for 1 hour (3600) 
+	EDIT - ADH - 3.27.17 - for 12 hours
+	*/
+	var lifetime = 3600 * 12;
 
 	taskrouterClient.workspace.workers.get({FriendlyName: friendlyName}, function (err, data) {
 		if (err) {
