@@ -5,6 +5,7 @@ var expressValidator 	= require('express-validator')
 var compression   		= require('compression')
 var mongo		  		= require('mongodb')
 var mongoose			= require('mongoose')
+var _ 					= require('underscore')
 
 //mongoose.connect('mongodb:\\localhost\insertDatabaseNameHere')
 //var db = mongoose.connection
@@ -125,3 +126,5 @@ app.use('/', express.static(__dirname + '/public'))
 app.listen(app.get('port'), function () {
 	console.log('magic happens on port', app.get('port'))
 })
+
+console.log(_.reduce([1, 2, 3, 4], (memo, num) => { return memo + num }, 0))
