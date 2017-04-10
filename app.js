@@ -94,6 +94,8 @@ router.route('/agents/login').post(agents.login)
 router.route('/agents/logout').post(agents.logout)
 router.route('/agents/session').get(agents.getSession)
 router.route('/agents/call').get(agents.call)
+router.route('/agents/transfer').get(agents.transfer)
+router.route('/agents/sms').get(agents.sms)
 
 /* routes for IVR */
 var ivr = require('./controllers/ivr.js')
@@ -101,6 +103,9 @@ var ivr = require('./controllers/ivr.js')
 router.route('/ivr/welcome').get(ivr.welcome)
 router.route('/ivr/select-team').get(ivr.selectTeam)
 router.route('/ivr/create-task').get(ivr.createTask)
+router.route('/ivr/directory').get(ivr.directory)
+router.route('/ivr/redirect').get(ivr.redirect)
+router.route('/ivr/redirect-custom').get(ivr.redirectCustom)
 
 /* routes called by the Twilio TaskRouter */
 var taskrouter = require('./controllers/taskrouter.js')

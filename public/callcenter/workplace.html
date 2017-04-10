@@ -141,8 +141,9 @@
     <section ng-controller="PhoneController" ng-cloak class="phone-controller" >
 
       <input style="font-size:2em; padding-left:10px;" ng-show="isActive == false" ng-model="phoneNumber" type="text" name="phoneNumber" placeholder="+.." />
-      <div class="phone-number" style="font-size:2em; padding-left:10px" ng-if="isActive == true" />{{phoneNumber}}</div>
-
+      <input style="font-size:2em; padding-left:10px;" ng-show="isActive == true" ng-model="transferNumber" type="text" name="forwardNumber" placeholder="+.." />     
+      <div class="forward-number" style="font-size:2em; padding-left:10px" ng-if="isActive == true" />{{phoneNumber}} => {{transferNumber}}</div>
+      
       <div class="keypad">
 
         <div ng-click="addDigit('1')" class="digit">1</div>
@@ -165,8 +166,18 @@
 
       <button class="button-call" ng-if="isActive == false" ng-click="call(phoneNumber)">CALL</button>
       <button class="button-hangup" ng-if="isActive == true" ng-click="hangup()">HANGUP</button>
+      <button class="button-forward" ng-if="isActive == true" ng-click="transfer(transferNumber)">FORWARD</button>
       <span class="status">Status: {{status}}</span>
       <span ng-if="error != null" class="status">Error: {{error}}</span>
+    </section>
+
+    <section ng-controller="SmsController" ng-cloak class="phone-controller">
+      
+      <input style="font-size:2em; padding-left:10px;" ng-show="isActive == false" ng-model="smsPhoneNumber" type="text" name="smsPhoneNumber" placeholder="+.." />
+      <div class="forward-number" style="font-size:2em; padding-left:10px" ng-if="isActive == true" />{{smsPhoneNumber}}</div>
+      <input style="font-size:2em; padding-left:10px;" ng-model="smsMessage" type="text" name="smsPhoneNumber" placeholder=".." />
+      <button class="button-send-sms" ng-click"sms()">SEND</button>
+
     </section>
 
     </div>

@@ -6,6 +6,13 @@
     "configurations": [
         
         {
+            "type": "chrome",
+            "request": "launch",
+            "name": "Launch Chrome",
+            "url": "http://localhost:5000",
+            "webRoot": "${workspaceRoot}"
+        },
+        {
             "type": "node",
             "request": "launch",
             "name": "Launch Program",

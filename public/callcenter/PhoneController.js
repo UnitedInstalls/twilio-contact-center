@@ -3,6 +3,7 @@ app.controller('PhoneController', function ($scope, $rootScope, $http, $timeout,
   $scope.status = null;
   $scope.isActive = false;
   $scope.phoneNumber = '';
+  $scope.transferNumber = '';
 
   $scope.connection;
 
@@ -19,7 +20,9 @@ app.controller('PhoneController', function ($scope, $rootScope, $http, $timeout,
     Twilio.Device.error(function (error) {
       $scope.status = 'error: ' + error.code + ' - ' + error.message;
       $scope.isActive = false;
-
+      
+      $log.log($scope.status);
+      
       $timeout(function(){
         $scope.$apply();
       });
@@ -31,7 +34,9 @@ app.controller('PhoneController', function ($scope, $rootScope, $http, $timeout,
       $scope.connection = conn;
       $scope.status = 'successfully established call';
       $scope.isActive = true;
-
+      
+      $log.log($scope.status);
+      
       $timeout(function(){
         $scope.$apply();
       });
@@ -43,6 +48,8 @@ app.controller('PhoneController', function ($scope, $rootScope, $http, $timeout,
       $scope.isActive = false;
       $scope.connection = null;
 
+      $log.log($scope.status);
+
       $timeout(function(){
         $scope.$apply();
       });
@@ -53,6 +60,8 @@ app.controller('PhoneController', function ($scope, $rootScope, $http, $timeout,
       $scope.status = 'offline';
       $scope.isActive = false;
 
+      $log.log($scope.status);
+
       $timeout(function(){
         $scope.$apply();
       });
@@ -62,7 +71,7 @@ app.controller('PhoneController', function ($scope, $rootScope, $http, $timeout,
     Twilio.Device.incoming(function (conn) {
       $scope.status = 'incoming connection from ' + conn.parameters.From;
       $scope.isActive = true;
-
+      
       conn.accept();
 
       conn.disconnect(function(conn) {
@@ -88,7 +97,7 @@ app.controller('PhoneController', function ($scope, $rootScope, $http, $timeout,
 
   $scope.call = function (phoneNumber) {
 
-    $scope.$broadcast('CallPhoneNumber', { phoneNumber: phoneNumber});
+    $scope.$broadcast('CallPhoneNumber', { phoneNumber: phoneNumber });
 
   };
 
@@ -111,7 +120,7 @@ app.controller('PhoneController', function ($scope, $rootScope, $http, $timeout,
     Twilio.Device.connect({'phone': data.phoneNumber});
 
     $scope.state = 'isActive';
-
+    
   });
 
 });      

@@ -176,6 +176,16 @@
 	overflow: hidden;
 }
 
+.phone-controller .forward-number
+{
+	box-sizing: border-box; 
+	width: 100%;
+	font-size: 1.8em;
+	padding: 5px 15px 5px 15px;
+	color:orange;
+	overflow: hidden;
+}
+
 .phone-controller .keypad
 {
 	overflow: auto;
@@ -229,6 +239,16 @@
 	border:1px solid red;
 	font-size: 1.6em;
 	background-color: red;
+	color:white;
+}
+
+.phone-controller .button-forward 
+{
+	width: 100%;
+	border-radius: 3px;
+	border:1px solid orange;
+	font-size: 1.6em;
+	background-color: orange;
 	color:white;
 }
 

@@ -12,7 +12,8 @@ module.exports.welcome = function (req, res) {
 	var twiml = new twilio.TwimlResponse()
 
 	twiml.gather({
-		action: 'select-team',
+		//action: 'select-team',
+		action: 'directory',
 		method: 'GET',
 		numDigits: 1,
 		timeout: 10
@@ -24,6 +25,84 @@ module.exports.welcome = function (req, res) {
 	res.setHeader('Content-Type', 'application/xml')
 	res.setHeader('Cache-Control', 'public, max-age=0')
 	res.send(twiml.toString())
+
+	console.log(twiml.toString())
+}
+
+module.exports.directory = function (req, res) {
+	var twiml = new twilio.TwimlResponse()
+
+	twiml.gather({
+		action: 'redirect',
+		method: 'GET',
+		numDigits: 1,
+		timeout: 10
+	}, function (gatherNode) {
+		gatherNode.say('Press 5 to be forwarded to The University of Cincinnati, press 6 to enter another number, or press 0 to continue to team selection.')
+	})
+
+	res.setHeader('Content-Type', 'application/xml')
+	res.setHeader('Cache-Control', 'public, max-age=0')
+	res.send(twiml.toString())
+
+	console.log(twiml.toString())
+}
+
+module.exports.redirect = function (req, res) {
+	var selection = null;
+	
+	selection = +req.query.Digits
+
+	var twiml = new twilio.TwimlResponse()
+
+	if (selection != 5 && selection != 0 && selection != 6) {
+		twiml.say('Your selection was not valid, please try again')
+		twiml.pause({length: 2})
+		twiml.redirect({ method: 'GET' }, 'directory')
+	} else if (selection == 0) {
+		twiml.redirect({ method: 'GET' }, 'select-team')
+	} else if (selection == 5) {
+		twiml.say('Now dialing The University of Cincinnati.')
+		twiml.dial('5135566000')
+	} else if (selection == 6) {
+		twiml.gather({
+			action: 'redirect-custom',
+			method: 'GET',
+			numDigits: 10,
+			timeout: 20
+		}, function (gatherNode) {
+		gatherNode.say('Please enter the 10 digit number you wish to dial now.')
+	})
+	}
+	
+	res.setHeader('Content-Type', 'application/xml')
+	res.setHeader('Cache-Control', 'public, max-age=0')
+	res.send(twiml.toString())
+
+	console.log(twiml.toString())
+}
+
+module.exports.redirectCustom = function (req, res) {
+	var selection = null;
+	
+	selection = +req.query.Digits
+
+	var twiml = new twilio.TwimlResponse()
+
+	if (selection === null || selection.length < 10) {
+		twiml.say('Your selection was not valid, please try again')
+		twiml.pause({length: 2})
+		twiml.redirect({ method: 'GET' }, 'directory')
+	} else {
+		twiml.say('Dialing.')
+		twiml.dial(selection.toString())
+	}
+
+	res.setHeader('Content-Type', 'application/xml')
+	res.setHeader('Cache-Control', 'public, max-age=0')
+	res.send(twiml.toString())
+
+	console.log(twiml.toString())
 }
 
 module.exports.selectTeam = function (req, res) {
@@ -76,6 +155,8 @@ module.exports.selectTeam = function (req, res) {
 	res.setHeader('Content-Type', 'application/xml')
 	res.setHeader('Cache-Control', 'public, max-age=0')
 	res.send(twiml.toString())
+
+	console.log(twiml.toString())
 }
 
 module.exports.createTask = function (req, res) {
@@ -108,6 +189,8 @@ module.exports.createTask = function (req, res) {
 		res.setHeader('Content-Type', 'application/xml')
 		res.setHeader('Cache-Control', 'public, max-age=0')
 		res.send(twiml.toString())
+
+		console.log(twiml.toString())
 	})
 
 }
@@ -120,7 +203,7 @@ module.exports.createTask = function (req, res) {
  */
 const holidayResponse = 'THANK YOU FOR CALLING UNITED INSTALLS, YOU HAVE REACHED US DURING A HOLIDAY. THERE IS A POSSIBILITY THAT SOMEONE MAY BE IN THE OFFICE. IF YOU KNOW YOUR PARTIES EXTENTION YOU MAY ENTER IT AT ANY TIME. WE DO ASK THAT YOU CALL BACK AT NORMAL BUSINESS HOURS OF 8 O’CLOCK AM TO 5:00 O’CLOCK PM MONDAY THROUGH FRIDAY'
 const afterHoursResponse = 'THANK YOU FOR CALLING UNITED INSTALLS, YOU HAVE REACHED US EITHER BEFORE OR AFTER NORMAL BUSINESS HOURS. THERE IS A POSSIBILITY THAT SOMEONE MAY STILL BE IN THE OFFICE. IF YOU KNOW YOUR PARTIES EXTENTION YOU MAY ENTER IT AT ANY TIME. WE DO ASK THAT YOU CALL BACK AT NORMAL BUSINESS HOURS OF 8 O’CLOCK AM TO 5 O’CLOCK PM MONDAY THROUGH FRIDAY'
-const mainResponse = 'THANK YOU FOR CALLING UNITED INSTALLS YOUR INDEPENDENT SERVICE PROVIDOR FOR LOWES, TO ENSURE THE HIGHEST LEVEL OF CUSTOMER CARE THIS CALL MAY BE RECORDED. IF YOU KNOW YOUR PARTIES EXTENTION YOU MAY DIAL IT AT ANY TIME. FOR FLOORING INSTALLATIONS PRESS 1, FOR KITCHEN & BATH REMODELING PRESS 2, FOR BILLING AND ACCOUNTING PRESS 3' //FOR ALL OTHER QUESTIONS PRESS 0.
+const mainResponse = 'THANK YOU FOR CALLING UNITED INSTALLS YOUR INDEPENDENT SERVICE PROVIDOR FOR LOWES, TO ENSURE THE HIGHEST LEVEL OF CUSTOMER CARE THIS CALL MAY BE RECORDED. IF YOU KNOW YOUR PARTIES EXTENTION YOU MAY DIAL it AT ANY TIME. FOR FLOORING INSTALLATIONS PRESS 1, FOR KITCHEN & BATH REMODELING PRESS 2, FOR BILLING AND ACCOUNTING PRESS 3' //FOR ALL OTHER QUESTIONS PRESS 0.
 const installationsResponse = 'TO SCHEDULE YOUR NEW FLOORING INSTALLATION PRESS 1, FOR QUESTIONS ABOUT YOUR SCHEDULED INSTALLATION PRESS 2, IF YOU ARE AN INSTALLATION TEAM MEMBER AND NEED ASSISSTANCE PRESS 3, IF YOU ARE AN ESTIMATOR AND NEED ASSISTANCE PRESS 4, FOR ALL OTHER QUESTIONS PLEASE PRESS 5'
 const accountingResponse = 'FOR ACCOUNTS PAYABLE PRESS 1, FOR ACCOUNTS RECEIVALBLE PRESS 3, FOR INSTALLER PAYMENTS PRESS 2, FOR EMPLOYEE PAYROLL PRESS 4, FOR HUMAN RESOURCES PRESS 5'
 const inQueue_1 = 'AT UNITED INSTALLS WE ARE STRIVING TO GIVE YOU WORLD CLASS SERVICE, PLEASE STAY ON THE LINE AND WE WILL BE RIGHT WITH YOU!'
